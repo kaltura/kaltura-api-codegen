@@ -1,5 +1,9 @@
 <% parameters.filter(function(param) {return param.fields}).forEach(function(param) { -%>
-<%- param.name %> = new <%- param.class %>();
+<% if (param.abstract) { -%>
+var <%- param.name %> = new <%- '<\%- Lucy.answer("subclass") || "' + param.class + '" %\>' %>();
+<% } else { -%>
+var <%- param.name %> = new <%- param.class %>();
+<% } -%>
 <%   param.fields.forEach(function(field) { -%>
 <%- '<\% if (Lucy.answer("' + field.name + '") !== null) { -%\>' %>
 <%     if (field.type.indexOf('Kaltura') === 0) { -%>

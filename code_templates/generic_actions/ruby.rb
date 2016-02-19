@@ -10,7 +10,11 @@
   }
 -%>
 <% parameters.filter(function(param) {return param.fields}).forEach(function(param) { -%>
+<% if (param.abstract) { -%>
+<%- param.name %> = <%- '<\%- Lucy.answer("subclass") || "' + param.class + '" %\>' %>.new();
+<% } else { -%>
 <%- param.name %> = <%- param.class %>.new();
+<% } -%>
 <%   param.fields.forEach(function(field) { -%>
 <%- '<\% if (Lucy.answer("' + field.name + '") !== null) { -%\>' %>
 <%     if (field.type.indexOf('Kaltura') === 0) { -%>

@@ -1,5 +1,9 @@
 <% parameters.filter(function(param) {return param.fields}).forEach(function(param, index) { -%>
+<% if (param.abstract) { -%>
+$<%- param.name %> = new <%- '<\%- Lucy.answer("subclass") || "' + param.class + '" %\>' %>();
+<% } else { -%>
 $<%- param.name %> = new <%- param.class %>();
+<% } -%>
 <%   param.fields.forEach(function(field) { -%>
 <%- '<\% if (Lucy.answer("' + field.name + '") !== null) { -%\>' %>
 <%     if (field.type.indexOf('Kaltura') === 0) { -%>
