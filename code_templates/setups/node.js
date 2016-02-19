@@ -1,4 +1,4 @@
-var Kaltura = require('./<%- Lucy.answer("libraryDirectory") || "lib/" %>KalturaClient.js');
+var Kaltura = require('./node_modules/kaltura/KalturaClient.js');
 var config = new Kaltura.KalturaConfiguration(<%- Lucy.answer('partnerId') %>);
 config.serviceUrl = <%- Lucy.code.variable('answers.serviceURL') %>;
 var client = new Kaltura.KalturaClient(config);
