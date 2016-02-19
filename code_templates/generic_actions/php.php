@@ -19,7 +19,6 @@ $<%- param.name %>-><%- field.name %> = <%- field.enum.name %>::<%- valueName %>
 <%     } -%>
 <%- '<\% } -%\>' %>
 <%   }); -%>
-
 <% }); -%>
 <% parameters.filter(function(param) {return !param.fields}).forEach(function(param, index) { -%>
 <%     if (param.name === 'userId') { -%>

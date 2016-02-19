@@ -30,7 +30,6 @@
 <%     } -%>
 <%- '<\% } -%\>' %>
 <%   }); -%>
-
 <% }); -%>
 <% parameters.filter(function(param) {return !param.fields}).forEach(function(param) { -%>
 <%     if (!param.enum) { -%>
