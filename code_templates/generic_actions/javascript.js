@@ -1,6 +1,6 @@
 <% parameters.filter(function(param) {return param.fields}).forEach(function(param) { -%>
 <% if (param.abstract) { -%>
-var <%- param.name %> = new <%- '<\%- Lucy.answer("subclass") || "' + param.class + '" %\>' %>();
+var <%- param.name %> = new <%- '<\%- Lucy.answer("objectType") || "' + param.class + '" %\>' %>();
 <% } else { -%>
 var <%- param.name %> = new <%- param.class %>();
 <% } -%>

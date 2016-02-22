@@ -11,7 +11,7 @@
 -%>
 <% parameters.filter(function(param) {return param.fields}).forEach(function(param) { -%>
 <% if (param.abstract) { -%>
-<%- param.name %> = <%- '<\%- Lucy.answer("subclass") || "' + param.class + '" %\>' %>.new();
+<%- param.name %> = <%- '<\%- Lucy.answer("objectType") || "' + param.class + '" %\>' %>.new();
 <% } else { -%>
 <%- param.name %> = <%- param.class %>.new();
 <% } -%>
