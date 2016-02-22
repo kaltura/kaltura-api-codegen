@@ -16,7 +16,11 @@
 <%- param.name %> = <%- param.class %>.new();
 <% } -%>
 <%   param.fields.forEach(function(field) { -%>
+<%    if (field.objectType) { -%>
+<%- '<\% if (Lucy.answer("objectType") === "' + field.objectType +'" && Lucy.answer("' + field.name + '") !== null) { -%\>' %>
+<%    } else { -%>
 <%- '<\% if (Lucy.answer("' + field.name + '") !== null) { -%\>' %>
+<%    } -%>
 <%     if (field.type.indexOf('Kaltura') === 0) { -%>
 <%- param.name %>.<%- rewriteVariable(field.name) %> = <%- '<\%- Lucy.answer("' + field.name + '") %\>' %>.new();
 <%     } else if (!field.enum) { -%>

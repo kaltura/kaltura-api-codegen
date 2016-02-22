@@ -5,7 +5,11 @@ var <%- param.name %> = new <%- '<\%- Lucy.answer("objectType") || "' + param.cl
 var <%- param.name %> = new <%- param.class %>();
 <% } -%>
 <%   param.fields.forEach(function(field) { -%>
+<%    if (field.objectType) { -%>
+<%- '<\% if (Lucy.answer("objectType") === "' + field.objectType +'" && Lucy.answer("' + field.name + '") !== null) { -%\>' %>
+<%    } else { -%>
 <%- '<\% if (Lucy.answer("' + field.name + '") !== null) { -%\>' %>
+<%    } -%>
 <%     if (field.type.indexOf('Kaltura') === 0) { -%>
 <%- param.name %>.<%- field.name %> = new <%- '<\%- Lucy.answer("' + field.name + '") %\>' %>();
 <%     } else if (!field.enum) { -%>
