@@ -1,4 +1,6 @@
-<% if (Lucy.answer('uiConf')) { -%>
+<% if (Lucy.answer('recipeName') === 'live_broadcast') { -%>
 <script src="/js/swfobject.js"></script>
+<% } -%>
+<% if (Lucy.answer('uiConf')) { -%>
 <script src="https://cdnapisec.kaltura.com/p/<%- Lucy.answer('partnerId') %>/sp/<%- Lucy.answer('partnerId') %>00/embedIframeJs/uiconf_id/<%- Lucy.answer('uiConf') %>/partner_id/<%- Lucy.answer('partnerId') %>"></script>
 <% } -%>
