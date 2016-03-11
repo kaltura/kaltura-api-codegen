@@ -1,12 +1,12 @@
 <% parameters.filter(function(param) {return param.fields}).forEach(function(param, index) { -%>
 <% if (param.abstract) { -%>
-$<%- param.name %> = new <%- '<\%- Lucy.answer("objectType") || "' + param.class + '" %\>' %>();
+$<%- param.name %> = new <%- '<\%- Lucy.answer("' + param.name + '[objectType]") || "' + param.class + '" %\>' %>();
 <% } else { -%>
 $<%- param.name %> = new <%- param.class %>();
 <% } -%>
 <%   param.fields.forEach(function(field) { -%>
 <%    if (field.objectType) { -%>
-<%- '<\% if (Lucy.answer("objectType") === "' + field.objectType +'" && Lucy.answer("' + field.name + '") !== null) { -%\>' %>
+<%- '<\% if (Lucy.answer("' + param.name + '[objectType]") === "' + field.objectType +'" && Lucy.answer("' + field.name + '") !== null) { -%\>' %>
 <%    } else { -%>
 <%- '<\% if (Lucy.answer("' + field.name + '") !== null) { -%\>' %>
 <%    } -%>

@@ -11,13 +11,13 @@
 -%>
 <% parameters.filter(function(param) {return param.fields}).forEach(function(param) { -%>
 <% if (param.abstract) { -%>
-<%- param.name %> = <%- '<\%- Lucy.answer("objectType") || "' + param.class + '" %\>' %>.new();
+<%- param.name %> = <%- '<\%- Lucy.answer("' + param.name + '[objectType]") || "' + param.class + '" %\>' %>.new();
 <% } else { -%>
 <%- param.name %> = <%- param.class %>.new();
 <% } -%>
 <%   param.fields.forEach(function(field) { -%>
 <%    if (field.objectType) { -%>
-<%- '<\% if (Lucy.answer("objectType") === "' + field.objectType +'" && Lucy.answer("' + field.name + '") !== null) { -%\>' %>
+<%- '<\% if (Lucy.answer("' + param.name + '[objectType]") === "' + field.objectType +'" && Lucy.answer("' + field.name + '") !== null) { -%\>' %>
 <%    } else { -%>
 <%- '<\% if (Lucy.answer("' + field.name + '") !== null) { -%\>' %>
 <%    } -%>
