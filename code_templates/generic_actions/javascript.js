@@ -41,16 +41,17 @@ client.<%- service %>.<%- action %>(function(success, results) {
 <% if (returns === 'list') { -%>
   if (!success || (results && results.code && results.message)) {
     console.log('Kaltura Error', success, results);
-<%- '<\%- Lucy.returnCode("results", 6) %\>' %>
+<%- '<\%- Lucy.returnCode("results", 4) %\>' %>
   } else {
     console.log('Kaltura Result', results);
-<%- '<\%- Lucy.returnCode("results.objects", 6) %\>' %>
+<%- '<\%- Lucy.returnCode("results.objects", 4) %\>' %>
   }
 <% } else { -%>
   if (!success || (results && results.code && results.message)) {
     console.log('Kaltura Error', success, results);
-  }
+  } else {
 <%- '<\%- Lucy.returnCode("results", 4) %\>' %>
+  }
 <% } -%>
 }<%- parameters.length === 0 ? ');' : ',' %>
 <% parameters.forEach(function(param, index) { -%>

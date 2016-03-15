@@ -40,12 +40,11 @@ var <%- param.name %> = Kaltura.enums.<%- param.enum.name %>.<%- valueName %>;
 client.<%- service %>.<%- action %>(function(results) {
   if (results && results.code && results.message) {
     console.log('Kaltura Error', results);
-    res.send(results.message);
   } else {
 <% if (returns === 'list') { -%>
-    <%- '<\%- Lucy.returnCode("results.objects", 4) %\>' %>
+<%- '<\%- Lucy.returnCode("results.objects", 4) %\>' %>
 <% } else { -%>
-    <%- '<\%- Lucy.returnCode("results", 4) %\>' %>
+<%- '<\%- Lucy.returnCode("results", 4) %\>' %>
 <% } -%>
   }
 }<%- parameters.length === 0 ? ');' : ',' %>
