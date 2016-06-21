@@ -5,18 +5,19 @@ var <%- param.name %> = new Kaltura.objects.<%- '<\%- Lucy.answer("' + param.nam
 var <%- param.name %> = new Kaltura.objects.<%- param.class %>();
 <% } -%>
 <%   param.fields.forEach(function(field) { -%>
+<%    var answerName = param.name + '[' + field.name + ']'; -%>
 <%    if (field.objectType) { -%>
-<%- '<\% if (Lucy.answer("' + param.name + '[objectType]") === "' + field.objectType +'" && Lucy.answer("' + field.name + '") !== null) { -%\>' %>
+<%- '<\% if (Lucy.answer("' + param.name + '[objectType]") === "' + field.objectType +'" && Lucy.answer("' + answerName + '") !== null) { -%\>' %>
 <%    } else { -%>
-<%- '<\% if (Lucy.answer("' + field.name + '") !== null) { -%\>' %>
+<%- '<\% if (Lucy.answer("' + answerName + '") !== null) { -%\>' %>
 <%    } -%>
 <%     if (field.type.indexOf('Kaltura') === 0) { -%>
-<%- param.name %>.<%- field.name %> = new Kaltura.objects.<%- '<\%- Lucy.answer("' + field.name + '") %\>' %>();
+<%- param.name %>.<%- field.name %> = new Kaltura.objects.<%- '<\%- Lucy.answer("' + answerName + '") %\>' %>();
 <%     } else if (!field.enum) { -%>
-<%- param.name %>.<%- field.name %> = <%- '<\%- Lucy.code.variable("answers.' + field.name + '") %\>' %>;
+<%- param.name %>.<%- field.name %> = <%- '<\%- Lucy.code.variable("answers.' + answerName + '") %\>' %>;
 <%     } else { -%>
 <%       for (valueName in field.enum.values) { -%>
-<%- '<\% if (Lucy.answer("' + field.name + '") === ' + JSON.stringify(field.enum.values[valueName]) + ') { -%\>' %>
+<%- '<\% if (Lucy.answer("' + answerName + '") === ' + JSON.stringify(field.enum.values[valueName]) + ') { -%\>' %>
 <%- param.name %>.<%- field.name %> = Kaltura.enums.<%- field.enum.name %>.<%- valueName %>;
 <%- '<\% } -%\>' %>
 <%       } -%>
@@ -39,12 +40,11 @@ var <%- param.name %> = Kaltura.enums.<%- param.enum.name %>.<%- valueName %>;
 client.<%- service %>.<%- action %>(function(results) {
   if (results && results.code && results.message) {
     console.log('Kaltura Error', results);
-    res.send(results.message);
   } else {
 <% if (returns === 'list') { -%>
-    <%- '<\%- Lucy.returnCode("results.objects", 4) %\>' %>
+<%- '<\%- Lucy.returnCode("results.objects", 4) %\>' %>
 <% } else { -%>
-    <%- '<\%- Lucy.returnCode("results", 4) %\>' %>
+<%- '<\%- Lucy.returnCode("results", 4) %\>' %>
 <% } -%>
   }
 }<%- parameters.length === 0 ? ');' : ',' %>

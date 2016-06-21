@@ -16,18 +16,19 @@
 <%- param.name %> = <%- param.class %>.new();
 <% } -%>
 <%   param.fields.forEach(function(field) { -%>
+<%    var answerName = param.name + '[' + field.name + ']'; -%>
 <%    if (field.objectType) { -%>
-<%- '<\% if (Lucy.answer("' + param.name + '[objectType]") === "' + field.objectType +'" && Lucy.answer("' + field.name + '") !== null) { -%\>' %>
+<%- '<\% if (Lucy.answer("' + param.name + '[objectType]") === "' + field.objectType +'" && Lucy.answer("' + answerName + '") !== null) { -%\>' %>
 <%    } else { -%>
-<%- '<\% if (Lucy.answer("' + field.name + '") !== null) { -%\>' %>
+<%- '<\% if (Lucy.answer("' + answerName + '") !== null) { -%\>' %>
 <%    } -%>
 <%     if (field.type.indexOf('Kaltura') === 0) { -%>
-<%- param.name %>.<%- rewriteVariable(field.name) %> = <%- '<\%- Lucy.answer("' + field.name + '") %\>' %>.new();
+<%- param.name %>.<%- rewriteVariable(field.name) %> = <%- '<\%- Lucy.answer("' + answerName + '") %\>' %>.new();
 <%     } else if (!field.enum) { -%>
-<%- param.name %>.<%- rewriteVariable(field.name) %> = <%- '<\%- Lucy.code.variable("answers.' + field.name + '") %\>' %>;
+<%- param.name %>.<%- rewriteVariable(field.name) %> = <%- '<\%- Lucy.code.variable("answers.' + answerName + '") %\>' %>;
 <%     } else { -%>
 <%       for (valueName in field.enum.values) { -%>
-<%- '<\% if (Lucy.answer("' + field.name + '") === ' + JSON.stringify(field.enum.values[valueName]) + ') { -%\>' %>
+<%- '<\% if (Lucy.answer("' + answerName + '") === ' + JSON.stringify(field.enum.values[valueName]) + ') { -%\>' %>
 <%- param.name %>.<%- rewriteVariable(field.name) %> = <%- field.enum.name %>::<%- valueName %>;
 <%- '<\% } -%\>' %>
 <%       } -%>
